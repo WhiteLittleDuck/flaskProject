@@ -1,0 +1,28 @@
+{
+    "data": {
+        "info":{
+            "id": "2",
+            "name":"Bar",
+            "total":23333,
+            "pos":23333,
+            "neg":10000,
+            "posRank": "2/100",
+            "countRank": "2/100",
+            "posRate": "50%"
+        },
+        "posExample":{
+            "content": "I love the bar in xxx APP!",
+            "score": 3,
+            "name": "Wecome"
+        },
+        "negExample":{
+            "content": "I hate the bar in xxx APP!",
+            "score": 2,
+            "name": "Wecome"
+        }
+    },
+    "meta": {
+        "msg": "success",
+        "status": 200
+    }
+}

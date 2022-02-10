@@ -1,0 +1,46 @@
+{
+    "data": {
+        "info":{
+            "id": "4baf2",
+            "name":"Gension Impact",
+            "total":4000,
+            "pos":2000,
+            "neg":2000,
+            "posRank": "1/100",
+            "UIRank": "1/100",
+            "countRank": "1/100",
+            "posRate": "50%",
+            "UIRate": "30%",
+            "link": "http://www.baidu.com",
+            "icon": "https://lh3.googleusercontent.com/OILGR0WWMkZQfTPolPKcl7i5avpg-cYc8LRKejPPFbfjwYauhFBoQ_c3xR_AR6R_JOI"
+        },
+        "version": [
+            {
+                "version": "4.1.1",
+                "rate": 20
+            },
+            {
+                "version": "4.1.2",
+                "rate": 30
+            },
+            {
+                "version": "4.1.3",
+                "rate": 80
+            }
+        ],
+        "posExample":{
+            "content": "I love the button!",
+            "score": 3,
+            "version": "4.1.1"
+        },
+        "negExample":{
+            "content": "I hate the button!",
+            "score": 2,
+            "version": "4.1.1"
+        }
+    },
+    "meta": {
+        "msg": "success",
+        "status": 200
+    }
+}

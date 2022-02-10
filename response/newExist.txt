@@ -1,0 +1,7 @@
+{
+    "data":{},
+    "meta": {
+        "msg": "already exist",
+        "status": 400
+    }
+}

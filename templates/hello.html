@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript"
+            src="{{ url_for('static', filename = 'hello.js') }}"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type = "button" onclick="sayHello()" value = "Say Hello">
+<h2>content</h2>
+<br>{{ my_str }}
+<br>{{ my_int }}
+<br>{{ my_arr }}
+<br>{{ my_dic }}
+<hr>
+<h2> show list elements</h2>
+<hr>
+{{ my_arr[0] }}
+<br>
+{{ my_arr.1 }}
+<br>
+{{ my_arr.2 }}
+<hr>
+<h2> show dictionary elements</h2>
+<hr>
+{{ my_dic['name'] }}
+<br>
+{{ my_dic.age }}
+
+</body>
+</html>

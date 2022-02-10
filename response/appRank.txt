@@ -1,0 +1,34 @@
+{
+    "data": {
+        "info": [
+            {
+                "rank": 1,
+                "name": "Button",
+                "total": 3322,
+                "positive": 1111,
+                "negative": 2211,
+                "rate": "90%"
+            },
+            {
+                "rank": 2,
+                "name": "Bar",
+                "total": 2233,
+                "positive": 1111,
+                "negative": 1122,
+                "rate": "80%"
+            },
+            {
+                "rank": 3,
+                "name": "Navigation",
+                "total": 33,
+                "positive": 11,
+                "negative": 22,
+                "rate": "70%"
+            }
+        ]
+    },
+    "meta": {
+        "msg": "success",
+        "status": 200
+    }
+}

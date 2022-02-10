@@ -1,0 +1,213 @@
+{
+    "data":{
+        "app":[
+             {
+                "rank": 1,
+                "name": "Wechat",
+                "total": 10000,
+                "positive": 9000,
+                "negative": 1000,
+                "rate": "90%",
+                "UIrate": "30%",
+                "id": "4a2213"
+            },
+             {
+                "rank": 2,
+                "name": "QQ",
+                "total": 5000,
+                "positive": 4000,
+                "negative": 1000,
+                "rate": "80%",
+                "UIrate": "5%",
+                "id": "3fda4"
+            },
+             {
+                "rank": 3,
+                "name": "Gension Impact",
+                "total": 4000,
+                "positive": 2000,
+                "negative": 2000,
+                "rate": "50%",
+                "UIrate": "15%",
+                "id": "4baf2"
+            },
+             {
+                "rank": 4,
+                "name": "Alipay",
+                "total": 2000,
+                "positive": 800,
+                "negative": 1200,
+                "rate": "40%",
+                "UIrate": "17%",
+                "id": "1234f"
+            },
+             {
+                "rank": 5,
+                "name": "Bilibi",
+                "total": 1000,
+                "positive": 300,
+                "negative": 700,
+                "rate": "30%",
+                "UIrate": "10%",
+                "id": "88ef2"
+            },
+             {
+                "rank": 6,
+                "name": "Twitter",
+                "total": 800,
+                "positive": 160,
+                "negative": 640,
+                "rate": "20%",
+                "UIrate": "5.5%",
+                "id": "ad43e"
+            },
+             {
+                "rank": 7,
+                "name": "Quora",
+                "total": 500,
+                "positive": 50,
+                "negative": 450,
+                "rate": "10%",
+                "UIrate": "13.333%",
+                "id": "ffee3"
+            },
+             {
+                "rank": 8,
+                "name": "JD",
+                "total": 200,
+                "positive": 10,
+                "negative": 190,
+                "rate": "5%",
+                "UIrate": "16%",
+                "id": "2f2fe"
+            },
+             {
+                "rank": 9,
+                "name": "TIM",
+                "total": 100,
+                "positive": 3,
+                "negative": 97,
+                "rate": "3%",
+                "UIrate": "50%",
+                "id": "22aad"
+            },
+             {
+                "rank": 10,
+                "name": "Shadowrocket",
+                "total": 50,
+                "positive": 1,
+                "negative": 49,
+                "rate": "2%",
+                "UIrate": "8%",
+                "id": "aaaaa"
+            }
+        ],
+        "key":[
+             {
+                "rank": 1,
+                "name": "Button",
+                "total": 10000,
+                "positive": 9000,
+                "negative": 1000,
+                "rate": "90%",
+                "UIrate": "30%",
+                "id": "11"
+            },
+             {
+                "rank": 2,
+                "name": "Bar",
+                "total": 5000,
+                "positive": 4000,
+                "negative": 1000,
+                "rate": "80%",
+                "UIrate": "5%",
+                "id": "12"
+            },
+             {
+                "rank": 3,
+                "name": "Navigation bar",
+                "total": 4000,
+                "positive": 2000,
+                "negative": 2000,
+                "rate": "50%",
+                "UIrate": "15%",
+                "id": "13"
+            },
+             {
+                "rank": 4,
+                "name": "widget",
+                "total": 2000,
+                "positive": 800,
+                "negative": 1200,
+                "rate": "40%",
+                "UIrate": "17%",
+                "id": "14"
+            },
+             {
+                "rank": 5,
+                "name": "Icon",
+                "total": 1000,
+                "positive": 300,
+                "negative": 700,
+                "rate": "30%",
+                "UIrate": "10%",
+                "id": "15"
+            },
+             {
+                "rank": 6,
+                "name": "Ttheme",
+                "total": 800,
+                "positive": 160,
+                "negative": 640,
+                "rate": "20%",
+                "UIrate": "5.5%",
+                "id": "16"
+            },
+             {
+                "rank": 7,
+                "name": "Slide Bar",
+                "total": 500,
+                "positive": 50,
+                "negative": 450,
+                "rate": "10%",
+                "UIrate": "13.333%",
+                "id": "17"
+            },
+             {
+                "rank": 8,
+                "name": "Back Button",
+                "total": 200,
+                "positive": 10,
+                "negative": 190,
+                "rate": "5%",
+                "UIrate": "16%",
+                "id": "18"
+            },
+             {
+                "rank": 9,
+                "name": "Notification",
+                "total": 100,
+                "positive": 3,
+                "negative": 97,
+                "rate": "3%",
+                "UIrate": "50%",
+                "id": "19"
+            },
+             {
+                "rank": 10,
+                "name": "AAA",
+                "total": 50,
+                "positive": 1,
+                "negative": 49,
+                "rate": "2%",
+                "UIrate": "8%",
+                "id": "10"
+            }
+        ]
+    },
+    "meta": {
+        "msg": "success",
+        "status": 200
+    }
+}
+

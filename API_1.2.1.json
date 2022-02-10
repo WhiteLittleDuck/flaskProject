@@ -1,0 +1,212 @@
+{
+  "data": {
+    "app": [
+      {
+        "name": "Refresh: Daily Bible Devotionals",
+        "total": "100,000+",
+        "positive": 4,
+        "negative": 0,
+        "rate": 1.0,
+        "UIRate": 0.025806451612903226,
+        "id": "com.bibleapplabs.devotionals",
+        "rank": 0
+      },
+      {
+        "name": "Big Neon",
+        "total": "5,000+",
+        "positive": 1,
+        "negative": 0,
+        "rate": 1.0,
+        "UIRate": 0.041666666666666664,
+        "id": "com.bigneon.mobile",
+        "rank": 1
+      },
+      {
+        "name": "BMX Cycle Race - Mountain Bicycle Stunt Rider",
+        "total": "1,000,000+",
+        "positive": 35,
+        "negative": 0,
+        "rate": 1.0,
+        "UIRate": 0.0341796875,
+        "id": "com.bmx.cycle.stunt.rider.racing.tracks.adventure.games",
+        "rank": 2
+      },
+      {
+        "name": "Boost Safe & Found",
+        "total": "100,000+",
+        "positive": 2,
+        "negative": 0,
+        "rate": 1.0,
+        "UIRate": 0.006578947368421052,
+        "id": "com.boost.safeandfound",
+        "rank": 3
+      },
+      {
+        "name": "Brilla - Short videos make your day",
+        "total": "1,000,000+",
+        "positive": 1,
+        "negative": 0,
+        "rate": 1.0,
+        "UIRate": 0.001718213058419244,
+        "id": "com.brilla.videos.app",
+        "rank": 4
+      },
+      {
+        "name": "Auto Auctions App - Used Cars and Trucks USA",
+        "total": "50,000+",
+        "positive": 1,
+        "negative": 0,
+        "rate": 1.0,
+        "UIRate": 0.022222222222222223,
+        "id": "com.carauctionnetwork.publicautoauctions",
+        "rank": 5
+      },
+      {
+        "name": "CarShield",
+        "total": "50,000+",
+        "positive": 2,
+        "negative": 0,
+        "rate": 1.0,
+        "UIRate": 0.010256410256410256,
+        "id": "com.carshield.app",
+        "rank": 6
+      },
+      {
+        "name": "Wild Fox Transform Bike Robot Shooting: Robot Game",
+        "total": "1,000,000+",
+        "positive": 27,
+        "negative": 0,
+        "rate": 1.0,
+        "UIRate": 0.02601156069364162,
+        "id": "com.cgs.fox.transform.bike.robot.shooting.robot.games",
+        "rank": 7
+      },
+      {
+        "name": "Kangaroo Robot Car Game: Robot Transforming Games",
+        "total": "100,000+",
+        "positive": 10,
+        "negative": 0,
+        "rate": 1.0,
+        "UIRate": 0.02247191011235955,
+        "id": "com.cgs.kangroo.robot.car.transform.robot.shooting.games",
+        "rank": 8
+      },
+      {
+        "name": "La Biblia en espa\u00f1ol gratis",
+        "total": "1,000,000+",
+        "positive": 3,
+        "negative": 0,
+        "rate": 1.0,
+        "UIRate": 0.002806361085126286,
+        "id": "com.cincoapp.labiblia",
+        "rank": 9
+      }
+    ],
+    "key": [
+      {
+        "name": "layout",
+        "total": 8998,
+        "positive": 5298,
+        "negative": 3304,
+        "rate": 0.6159032783073703,
+        "UIRate": 0.9559902200488998,
+        "id": 7,
+        "rank": 0
+      },
+      {
+        "name": "bold",
+        "total": 563,
+        "positive": 200,
+        "negative": 135,
+        "rate": 0.5970149253731343,
+        "UIRate": 0.5950266429840142,
+        "id": 44,
+        "rank": 1
+      },
+      {
+        "name": "appearance",
+        "total": 772,
+        "positive": 294,
+        "negative": 206,
+        "rate": 0.588,
+        "UIRate": 0.6476683937823834,
+        "id": 41,
+        "rank": 2
+      },
+      {
+        "name": "photo",
+        "total": 47140,
+        "positive": 3958,
+        "negative": 2800,
+        "rate": 0.5856762355726546,
+        "UIRate": 0.14336020364870597,
+        "id": 97,
+        "rank": 3
+      },
+      {
+        "name": "weight",
+        "total": 8053,
+        "positive": 394,
+        "negative": 290,
+        "rate": 0.5760233918128655,
+        "UIRate": 0.08493729045076369,
+        "id": 81,
+        "rank": 4
+      },
+      {
+        "name": "form",
+        "total": 14752,
+        "positive": 6253,
+        "negative": 4988,
+        "rate": 0.556267236011031,
+        "UIRate": 0.7619983731019523,
+        "id": 24,
+        "rank": 5
+      },
+      {
+        "name": "background",
+        "total": 14462,
+        "positive": 3487,
+        "negative": 2839,
+        "rate": 0.5512171988618401,
+        "UIRate": 0.43742220992947034,
+        "id": 88,
+        "rank": 6
+      },
+      {
+        "name": "gradient",
+        "total": 207,
+        "positive": 50,
+        "negative": 41,
+        "rate": 0.5494505494505495,
+        "UIRate": 0.4396135265700483,
+        "id": 54,
+        "rank": 7
+      },
+      {
+        "name": "font",
+        "total": 7453,
+        "positive": 2024,
+        "negative": 1681,
+        "rate": 0.5462887989203778,
+        "UIRate": 0.4971152556017711,
+        "id": 91,
+        "rank": 8
+      },
+      {
+        "name": "visibility",
+        "total": 317,
+        "positive": 70,
+        "negative": 60,
+        "rate": 0.5384615384615384,
+        "UIRate": 0.41009463722397477,
+        "id": 80,
+        "rank": 9
+      }
+    ]
+  },
+  "meta": {
+    "msg": "success",
+    "status": 200
+  }
+}

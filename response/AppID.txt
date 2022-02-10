@@ -1,0 +1,19 @@
+{
+    "data": {
+        "id": [
+            {
+            	"id":"abcd3"
+        	},
+            {
+                "id":"22sda"
+            },
+            {
+                "id":"e4ds2"
+            }
+        ]
+    },
+    "meta": {
+        "msg": "success",
+        "status": 200
+    }
+}

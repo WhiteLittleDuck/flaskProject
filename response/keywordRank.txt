@@ -1,0 +1,34 @@
+{
+    "data": {
+        "info": [
+            {
+                "rank": 1,
+                "name": "Wecome",
+                "total": 1000,
+                "positive": 1000,
+                "negative": 0,
+                "rate": "100%"
+            },
+            {
+                "rank": 2,
+                "name": "WeChat",
+                "total": 1000,
+                "positive": 800,
+                "negative": 200,
+                "rate": "80%"
+            },
+            {
+                "rank": 3,
+                "name": "QQ",
+                "total": 1000,
+                "positive": 500,
+                "negative": 500,
+                "rate": "50%"
+            }
+        ]
+    },
+    "meta": {
+        "msg": "success",
+        "status": 200
+    }
+}

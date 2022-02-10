@@ -1,0 +1,7 @@
+{
+    "data":{},
+    "meta": {
+        "msg": "success",
+        "status": 200
+    }
+}

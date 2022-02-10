@@ -1,0 +1,7 @@
+{
+    "data": {},
+    "meta": {
+        "msg": "NOT FOUND",
+        "status": 404
+    }
+}

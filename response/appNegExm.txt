@@ -1,0 +1,11 @@
+{
+    "data": {
+        "content": "The button is suprisingly suck!",
+        "score": 5,
+        "version": "4.1.3"
+    },
+    "meta": {
+        "msg": "success",
+        "status": 200
+    }
+}
