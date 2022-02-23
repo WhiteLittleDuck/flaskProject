@@ -2,39 +2,39 @@ from flask import Flask, redirect, url_for, send_from_directory, make_response
 from flask import request
 import os
 from flask import render_template
+from mongoDB_processing.db_tool import DBTool
+import json
 
 app = Flask(__name__)
-
+# 0: count 1: pos rank 2: neg rate 3: UI rate
+db_tool=DBTool('mongoDB_processing/current_data/')
 
 @app.route('/')
 def hello_world():
     return 'Hello World!'
 
 
-# from API.API import rank_info
+# Dashboard(Rank): get app and key dashboard rank info
 @app.route('/api/rank')
 def getRankInfo():
+    print("/api/app:" + str(request.args))
     order = int(request.args.get("order"))
     page = int(request.args.get("page"))
-    # return rank_info(order,page)
-    print(request.args)
-    # with open('API_1.2.1.json',) as f:
-    with open('response_test/rank.txt') as f:
-        content = f.read()
-    return content
+    return db_tool.read_rank_record(page,order)
 
-
+# Icons(App): get app info
 @app.route('/api/app')
 def getAppInfo():
-    # print("/api/app:")
     print("/api/app:" + str(request.args))
-    if (request.args.get("id") == 'aaa'):
-        filename = 'response_test/error.txt'
-    else:
-        filename = 'response_test/app.txt'
-    with open(filename) as f:
-        content = f.read()
-    return content
+    # if (request.args.get("id") == 'aaa'):
+    #     filename = 'response_test/error.txt'
+    # else:
+    #     filename = 'response_test/app.txt'
+    # with open(filename) as f:
+    #     content = f.read()
+    # return content
+    return db_tool.find_app_info(request.args.get("id"))
+
 
 
 @app.route('/api/app/rank')
@@ -64,14 +64,14 @@ def downloadFile():
 @app.route("/api/app/switch")
 def getAppSwitch():
     print("/api/app/switch" + str(request.args))
-    if request.args.get('type') == "1":
-        filename = 'response_test/appPosExm.txt'
-    else:
-        filename = 'response_test/appNegExm.txt'
-    with open(filename) as f:
-        content = f.read()
-    return content
-
+    # if request.args.get('type') == "1":
+    #     filename = 'response_test/appPosExm.txt'
+    # else:
+    #     filename = 'response_test/appNegExm.txt'
+    # with open(filename) as f:
+    #     content = f.read()
+    # return content
+    return db_tool.getExample(request.args.get('id'), int(request.args.get('type')))
 
 @app.route("/api/keyword")
 def getKeywordInfo():
@@ -234,7 +234,7 @@ def index():
 
 
 if __name__ == '__main__':
-    # app.add_url_rule('/','nice',nice)
     app.debug = True
     app.run()
     app.run(debug=True)
+
