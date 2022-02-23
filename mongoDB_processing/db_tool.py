@@ -1,6 +1,7 @@
 import pymongo
 import json
 import random
+import operator
 from bson.objectid import ObjectId
 
 class DBTool():
@@ -98,8 +99,16 @@ class DBTool():
         return {'data':data,"meta": {"msg": "success","status": 200}}
 
 
-    # get an app
-
+    # get an app's keyword rank
+    def getAppKeywordRank(self, appId, order):
+        orderList=['cnt','pos_cnt', 'neg_cnt', 'pos_rate', 'neg_rate']
+        app=self.collections[0].find_one({'appId': appId})
+        sortedList=sorted(app['keyword_info'],key=operator.itemgetter(orderList[order]), reverse=True)
+        info=[]
+        for i in range(min(7,len(sortedList))):
+            sortedList[i]['rank']=i+1
+            info.append(sortedList[i])
+        return {'data':{'info':info}, "meta": {"msg": "success", "status": 200}}
 
 # appsort=AppSort()
 # for app in appsort.getRankList('ui_cnt'):

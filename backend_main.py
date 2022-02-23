@@ -40,14 +40,15 @@ def getAppInfo():
 @app.route('/api/app/rank')
 def getAppRankInfo():
     print("/api/app/rank:" + str(request.args))
-    if (request.args.get("id") == 'aaa'):
-        filename = 'response_test/error.txt'
-    else:
-        filename = 'response_test/appRank.txt'
-
-    with open(filename) as f:
-        content = f.read()
-    return content
+    # if (request.args.get("id") == 'aaa'):
+    #     filename = 'response_test/error.txt'
+    # else:
+    #     filename = 'response_test/appRank.txt'
+    #
+    # with open(filename) as f:
+    #     content = f.read()
+    # return content
+    return db_tool.getAppKeywordRank(request.args.get("id"), int(request.args.get("order")))
 
 
 @app.route("/api/download")
