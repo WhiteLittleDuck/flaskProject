@@ -1,4 +1,4 @@
-word
+wireframe
 title
 size
 text
@@ -26,7 +26,7 @@ result
 radio
 progress
 picker
-nevigation
+navigation
 notification
 message
 load
@@ -46,7 +46,7 @@ structure
 space
 shape
 scale
-role
+row
 layout
 position
 look
@@ -56,7 +56,7 @@ clarity
 combination
 column
 alignment
-apparence
+appearance
 bar
 baseline
 bold
@@ -98,3 +98,4 @@ typography
 visibility
 weight
 widget
+menu

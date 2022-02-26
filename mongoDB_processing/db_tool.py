@@ -83,8 +83,20 @@ class DBTool():
                          'version_neg_cnt': version_neg_cnt
                          }, "meta": {"msg": "success","status": 200}}
 
-    # pick an example of review
-    def getExample(self, appId, sentiment):
+    #find keyword with keyword name(appId) return info
+    def find_keyword_info(self, keyid):
+        keyword=self.collections[1].find_one({'appId': keyid})
+        if keyword == None:
+            return {"data": {}, "meta": { "msg": "NOT FOUND", "status": 404}}
+        extract_index=['ui_cnt', 'ui_pos_cnt', 'ui_neg_cnt', 'ui_pos_rate']
+        info={'keyid': keyword['appId']}
+        for index in extract_index:
+            info[index]=keyword[index]
+        return {'data':{'info':info},"meta": {"msg": "success","status": 200}}
+
+
+    # pick an app example of review
+    def get_app_example(self, appId, sentiment):
         condition =  {'sentiment': sentiment, 'appId': appId}
         count = self.collections[2].count_documents(condition)
         if count == 0:
@@ -95,12 +107,22 @@ class DBTool():
         data['content']=review['content']
         data['version']=review['reviewCreatedVersion']
         data['score']=review['score']
-        data['name']='this is name, where it needs?'
         return {'data':data,"meta": {"msg": "success","status": 200}}
 
+    def get_keyword_example(self, keyid, type):
+        keyword = self.collections[1].find_one({'appId': keyid})
+        if type == 1:
+            sentiment = 'posExample'
+        else:
+            sentiment = 'negExample'
+        count = len(keyword[sentiment])
+        if count == 0:
+            return {"data": {},"meta": {"msg": "NOT FOUND","status": 404}}
+        data = keyword[sentiment][random.randint(0,count-1)]
+        return {'data':data,"meta": {"msg": "success","status": 200}}
 
     # get an app's keyword rank
-    def getAppKeywordRank(self, appId, order):
+    def get_app_keyword_rank(self, appId, order):
         orderList=['cnt','pos_cnt', 'neg_cnt', 'pos_rate', 'neg_rate']
         app=self.collections[0].find_one({'appId': appId})
         sortedList=sorted(app['keyword_info'],key=operator.itemgetter(orderList[order]), reverse=True)
@@ -110,6 +132,13 @@ class DBTool():
             info.append(sortedList[i])
         return {'data':{'info':info}, "meta": {"msg": "success", "status": 200}}
 
+    # get a keyword's app rank
+    def get_keyword_app_rank(self, keyid, order):
+        orderList = ['app_rank_cnt', 'app_rank_pos_cnt', 'app_rank_neg_cnt', 'app_rank_pos_rate', 'app_rank_neg_rate']
+        keyword = self.collections[1].find_one({'appId': keyid})
+        if keyword == None:
+            return {"data": {},"meta": {"msg": "NOT FOUND","status": 404}}
+        return {'data':{'info':keyword[orderList[order]]},"meta": {"msg": "success","status": 200}}
 # appsort=AppSort()
 # for app in appsort.getRankList('ui_cnt'):
 #     print(app)
