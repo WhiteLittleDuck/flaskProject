@@ -4,10 +4,16 @@ import os
 from flask import render_template
 from mongoDB_processing.db_tool import DBTool
 import json
-
+# TODO
+# 1. 改 app / keyword rank 3个 rank pos/neg rate 排序权重
+# 2. keyword: sentiment 逐句分析，keyword +-，app: 整个分析
+# 3. app example 设定某一版本的查询
+# 4. automatic tool
+# 5. 整理download 文档
+# 6. 答辩的时候专注于 "这个对人有什么帮助"， 下载button好评率最低的app截图证明数据准确性
 app = Flask(__name__)
 # 0: count 1: pos rank 2: neg rate 3: UI rate
-db_tool=DBTool('mongoDB_processing/current_data/')
+db_tool=DBTool()
 
 @app.route('/')
 def hello_world():
@@ -20,35 +26,43 @@ def getRankInfo():
     print("/api/app:" + str(request.args))
     order = int(request.args.get("order"))
     page = int(request.args.get("page"))
-    return db_tool.read_rank_record(page,order)
+    return db_tool.get_rank(page,order)
 
-# Icons(App): get app info
+
 @app.route('/api/app')
 def getAppInfo():
     print("/api/app:" + str(request.args))
-    # if (request.args.get("id") == 'aaa'):
-    #     filename = 'response_test/error.txt'
-    # else:
-    #     filename = 'response_test/app.txt'
-    # with open(filename) as f:
-    #     content = f.read()
-    # return content
-    return db_tool.find_app_info(request.args.get("id"))
+    return db_tool.get_app_info(request.args.get("id"))
 
+
+@app.route("/api/keyword")
+def getKeywordInfo():
+    print("/api/keywords:" + str(request.args))
+    return db_tool.get_keyword_info(request.args.get("id"))
+
+
+@app.route("/api/app/switch")
+def getAppSwitch():
+    print("/api/app/switch" + str(request.args))
+    return db_tool.get_app_example(request.args.get('id'), int(request.args.get('type')))
+
+
+@app.route("/api/keyword/switch")
+def getKeywordSwitch():
+    print("/api/app/switch" + str(request.args))
+    return db_tool.get_keyword_example(request.args.get('id'),int(request.args.get('type')))
 
 
 @app.route('/api/app/rank')
-def getAppRankInfo():
+def getAppKeywordRank():
     print("/api/app/rank:" + str(request.args))
-    # if (request.args.get("id") == 'aaa'):
-    #     filename = 'response_test/error.txt'
-    # else:
-    #     filename = 'response_test/appRank.txt'
-    #
-    # with open(filename) as f:
-    #     content = f.read()
-    # return content
     return db_tool.get_app_keyword_rank(request.args.get("id"), int(request.args.get("order")))
+
+
+@app.route("/api/keyword/rank")
+def getKeywordAppRank():
+    print("/api/keyword/rank:" + str(request.args))
+    return db_tool.get_keyword_app_rank(request.args.get("id"), int(request.args.get("order")))
 
 
 @app.route("/api/download")
@@ -61,50 +75,6 @@ def downloadFile():
     response.headers["Content-Disposition"] = "attachment; filename={}".format(filename.encode().decode('latin-1'))
     return response
 
-
-@app.route("/api/app/switch")
-def getAppSwitch():
-    print("/api/app/switch" + str(request.args))
-    # if request.args.get('type') == "1":
-    #     filename = 'response_test/appPosExm.txt'
-    # else:
-    #     filename = 'response_test/appNegExm.txt'
-    # with open(filename) as f:
-    #     content = f.read()
-    # return content
-    return db_tool.get_app_example(request.args.get('id'), int(request.args.get('type')))
-
-@app.route("/api/keyword")
-def getKeywordInfo():
-    print("/api/keywords:" + str(request.args))
-    # filename = "response_test/keyword.txt"
-    # if (request.args.get("id") == 'aaa'):
-    #     filename = 'response_test/error.txt'
-    # with open(filename) as f:
-    #     content = f.read()
-    # return content
-    return db_tool.find_keyword_info(request.args.get("id"))
-
-@app.route("/api/keyword/rank")
-def getKeywordRankInfo():
-    print("/api/keyword/rank:" + str(request.args))
-    # filename = "response_test/keywordRank.txt"
-    # with open(filename) as f:
-    #     content = f.read()
-    # return content
-    return db_tool.get_keyword_app_rank(request.args.get("id"), int(request.args.get("order")))
-
-@app.route("/api/keyword/switch")
-def getKeywordSwitch():
-    print("/api/app/switch" + str(request.args))
-    # if request.args.get('type') == "1":
-    #     filename = 'response_test/keywordPosExm.txt'
-    # else:
-    #     filename = 'response_test/keywordNegExm.txt'
-    # with open(filename) as f:
-    #     content = f.read()
-    # return content
-    return db_tool.get_keyword_example(request.args.get('id'),int(request.args.get('type')))
 
 @app.route("/api/app/id", methods=['POST'])
 def getAppID():

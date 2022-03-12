@@ -1,5 +1,7 @@
 import pymongo
 import operator
+import re
+
 
 # connect db
 client = pymongo.MongoClient(host='localhost', port=27017)
@@ -43,20 +45,23 @@ def add_review_example_in_keyword_info():
         for r in pos_reviews:
             if cnt>=20:
                 break
-            content=r['content'].replace(k['appId'], '<span style="font-weight:bold">'+k['appId']+'</span>')
-            k['posExample'].append({'content':content, 'score':r['score'], 'appId': r['appId']})
-            cnt+=1
+            words = re.split('[^a-zA-Z]', r['content'])
+            if k['appId'] in words or k['appId'].capitalize() in words:
+                content=r['content'].replace(k['appId'], '<span style="font-weight:bold;font-style: italic; text-decoration: underline">'+k['appId']+'</span>')
+                k['posExample'].append({'content':content, 'score':r['score'], 'appId': r['appId']})
+                cnt+=1
         cnt = 0
         for r in neg_reviews:
             if cnt>=20:
                 break
-            content=r['content'].replace(k['appId'], '<span style="font-weight:bold">'+k['appId']+'</span>')
-
-            k['negExample'].append({'content':content, 'score':r['score'], 'appId': r['appId']})
-            cnt+=1
+            words = re.split('[^a-zA-Z]', r['content'])
+            if k['appId'] in words or k['appId'].capitalize() in words:
+                content=r['content'].replace(k['appId'], '<span style="font-weight:bold; font-style: italic; text-decoration: underline">'+k['appId']+'</span>')
+                k['negExample'].append({'content':content, 'score':r['score'], 'appId': r['appId']})
+                cnt+=1
         keyword_info.update_one({'appId': k['appId']},{'$set': k})
 
-def calculate_ui_ineach_app():
+def calculate_ui_ineach_app(): # todo 可以写一个O(1)的算法
     keyword_list=[]
     with open('keyword.txt','r',encoding='utf-8') as f:
         line = f.readline()
@@ -65,23 +70,34 @@ def calculate_ui_ineach_app():
             # print(line.strip())
             line=f.readline()
     i = 0
-    for app in app_info.find():
-        app_keyword_info=[]
+    app_dic = {}
+    for review in filtered_review.find():
+        appId = review['appId']
+        if appId not in app_dic:
+            app_dic[appId] = {}
+        words = re.split('[^a-zA-Z]', review['content'])
         for keyword in keyword_list:
-            cnt=filtered_review.count_documents({'appId': app['appId'], 'content': {'$regex': '.*'+keyword+'.*'}})
-            pos_cnt=filtered_review.count_documents({'appId': app['appId'], 'sentiment':1,'content': {'$regex': '.*'+keyword+'.*'}})
-            neg_cnt=filtered_review.count_documents({'appId': app['appId'], 'sentiment':-1,'content': {'$regex': '.*'+keyword+'.*'}})
-            if cnt == 0:
-                continue
-            else:
-                pos_rate=pos_cnt/cnt
-                neg_rate=neg_cnt/cnt
-            app_keyword_info.append(
-                {'name': keyword, 'cnt': cnt, 'pos_cnt': pos_cnt, 'neg_cnt': neg_cnt, 'pos_rate': pos_rate, 'neg_rate': neg_rate})
-        app['keyword_info']=app_keyword_info
-        app_info.update_one({'appId': app['appId']},{'$set': app})
+            if keyword in words or keyword.capitalize() in words:
+                if keyword not in app_dic[appId]:
+                    app_dic[appId][keyword]={'name': keyword, 'cnt': 0, 'pos_cnt': 0, 'neg_cnt': 0, 'pos_rate': 0, 'neg_rate': 0}
+                app_dic[appId][keyword]['cnt']+=1
+                if review['sentiment'] == 1:
+                    app_dic[appId][keyword]['pos_cnt']+=1
+                if review['sentiment'] == -1:
+                    app_dic[appId][keyword]['neg_cnt']+=1
         i+=1
-        print(str(i)+'/2941')
+        print(i)
+    for appId in app_dic:
+        for keyword in app_dic[appId]:
+            app_dic[appId][keyword]['pos_rate']=app_dic[appId][keyword]['pos_cnt']/app_dic[appId][keyword]['cnt']
+            app_dic[appId][keyword]['neg_rate']=app_dic[appId][keyword]['neg_cnt']/app_dic[appId][keyword]['cnt']
+
+    for app in app_info.find():
+        if app['appId'] not in app_dic:
+            continue
+        app['keyword_info']=app_dic[app['appId']]
+        app_info.update_one({'appId': app['appId']}, {'$set': app})
+
 
 def add_rank(list):
     r =1
@@ -94,24 +110,25 @@ def add_app_rank_list_in_keyword_info():
     key_dic={}
     for app in app_info.find():
         for k in app['keyword_info']:
-            k['appId']=app['appId']
-            if k['name'] not in key_dic:
-                key_dic[k['name']]=[]
-            key_dic[k['name']].append(k)
+            app['keyword_info'][k]['appId']=app['appId']
+            if k not in key_dic:
+                key_dic[k]=[]
+            key_dic[k].append(app['keyword_info'][k])
     for key in key_dic:
         keyword_item = keyword_info.find_one({'appId':key})
         # print(key)
         # print(keyword_item['appId'])
-        keyword_item['app_rank_cnt']=add_rank(sorted(key_dic[key], key=operator.itemgetter('cnt'),reverse=True))[:7]
-        keyword_item['app_rank_pos_cnt'] = add_rank(sorted(key_dic[key], key=operator.itemgetter('pos_cnt'), reverse=True))[:7]
-        keyword_item['app_rank_neg_cnt'] = add_rank(sorted(key_dic[key], key=operator.itemgetter('neg_cnt'), reverse=True))[:7]
-        keyword_item['app_rank_pos_rate'] = add_rank(sorted(key_dic[key], key=operator.itemgetter('pos_rate'), reverse=True))[:7]
-        keyword_item['app_rank_neg_rate'] = add_rank(sorted(key_dic[key], key=operator.itemgetter('neg_rate'), reverse=True))[:7]
-        # keyword_info.update_one({'appId': keyword_item['appId']},{'$set': keyword_item})
+        keyword_item['app_rank_cnt']=add_rank(sorted(key_dic[key], key=operator.itemgetter('cnt'),reverse=True)[:7])
+        keyword_item['app_rank_pos_cnt'] = add_rank(sorted(key_dic[key], key=operator.itemgetter('pos_cnt'), reverse=True)[:7])
+        keyword_item['app_rank_neg_cnt'] = add_rank(sorted(key_dic[key], key=operator.itemgetter('neg_cnt'), reverse=True)[:7])
+        keyword_item['app_rank_pos_rate'] = add_rank(sorted(key_dic[key], key=operator.itemgetter('pos_rate'), reverse=True)[:7])
+        keyword_item['app_rank_neg_rate'] = add_rank(sorted(key_dic[key], key=operator.itemgetter('neg_rate'), reverse=True)[:7])
+        keyword_info.update_one({'appId': keyword_item['appId']},{'$set': keyword_item})
 
-        print('design:')
-        for item in keyword_item['app_rank_pos_rate']:
-            print(item)
+        # print('wireframe:')
+        # if key == 'wireframe':
+        #     for item in keyword_item['app_rank_cnt']:
+        #         print(item)
 
     # only keyword 'wireframe not include!'
     k=keyword_info.find_one({'appId': 'wireframe'})
@@ -121,12 +138,14 @@ def add_app_rank_list_in_keyword_info():
     k['app_rank_pos_rate']=[]
     k['app_rank_neg_rate']=[]
     keyword_info.update_one({'appId':'wireframe'},{'$set':k})
+    for keyword in keyword_info.find({'app_rank_cnt': {'$exists': False}}):
+        print(keyword['appId']+' not exist!')
 
 
 if __name__ == '__main__':
     # sort_versions()
     # turn_key_info_attr_from_dic_to_list()
-    # add_review_example_in_keyword_info()
-    calculate_ui_ineach_app()
+    add_review_example_in_keyword_info()
+    # calculate_ui_ineach_app()
     # add_app_rank_list_in_keyword_info()
     print('done')
